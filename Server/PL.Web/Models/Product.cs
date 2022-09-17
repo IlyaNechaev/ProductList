@@ -15,4 +15,6 @@ public class Product
 
     [Required]
     public int Count { get; set; }
+
+    public ICollection<Order> Orders { get; set; }
 }

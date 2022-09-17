@@ -18,4 +18,6 @@ public class User
 
     [Required]
     public string PasswordHash { get; set; }
+
+    public ICollection<Order> Orders { get; set; }
 }
