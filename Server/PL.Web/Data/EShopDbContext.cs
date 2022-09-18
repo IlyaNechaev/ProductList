@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PL.Web.Models;
 
 namespace PL.Web.Data;
 

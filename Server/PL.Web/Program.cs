@@ -1,7 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using PL.Web.Data;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
