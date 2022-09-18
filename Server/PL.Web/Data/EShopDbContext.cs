@@ -9,7 +9,7 @@ public class EShopDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Order> Orders { get; set; }
 
-    public EShopDbContext()
+    public EShopDbContext(DbContextOptions options) : base(options)
     {
         Database.EnsureCreated();
     }
@@ -18,14 +18,20 @@ public class EShopDbContext : DbContext
     {
         #region ORDER
 
+        var orderBuilder = builder.Entity<Order>();
+
         // Первичный ключ
-        builder.Entity<Order>()
+        orderBuilder
             .HasKey(nameof(Order.ObjectID));
 
-        // Связь "многие-ко-многим"
-        builder.Entity<Order>()
+        // Связь с продуктами
+        orderBuilder
             .HasMany(nameof(Order.Products))
             .WithMany(nameof(Product.Orders));
+
+        // Индекс
+        orderBuilder
+            .HasIndex(nameof(Order.Number));
 
         #endregion
     }

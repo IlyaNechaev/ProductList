@@ -4,10 +4,8 @@ using PL.Web.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -16,10 +14,11 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("Default");
 
-builder.Services.AddDbContext<EShopDbContext>(options =>
+// Entity Framework Core
+builder.Services.AddDbContext<EShopDbContext>(builder =>
 {
-    options.UseSqlServer();
-})
+    builder.UseSqlServer(connectionString);
+});
 
 #endregion
 
