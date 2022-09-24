@@ -17,6 +17,8 @@ builder.Services.AddDbContext<EShopDbContext>(builder =>
     builder.UseSqlServer(connectionString);
 });
 
+builder.Services.AddTransient<IUserService, UserService>();
+
 #endregion
 
 var app = builder.Build();
