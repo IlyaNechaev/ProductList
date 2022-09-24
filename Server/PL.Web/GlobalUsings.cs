@@ -8,3 +8,4 @@ global using PL.Web.Controllers;
 global using PL.Web.Services;
 global using PL.Web.Services.Interfaces;
 global using PL.Web.Services.Implements;
+global using PL.Web.Middleware;
