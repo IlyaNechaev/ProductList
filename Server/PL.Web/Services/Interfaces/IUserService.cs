@@ -8,8 +8,8 @@ public interface IUserService
     public Task<User> GetUserByIdAsync(string id);
     public User GetUserById(Guid id);
     public Task<User> GetUserByIdAsync(Guid id);
-    public User GetUserByLogin(string login);
-    public Task<User> GetUserByLoginAsync(string login);
+    public IEnumerable<User> GetUsersByLogin(string login);
+    public Task<IEnumerable<User>> GetUsersByLoginAsync(string login);
 
     #endregion
 

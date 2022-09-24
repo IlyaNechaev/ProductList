@@ -4,6 +4,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddLogging();
 
 // Добавляем собственные сервисы
 #region CUSTOM_SERVICES
