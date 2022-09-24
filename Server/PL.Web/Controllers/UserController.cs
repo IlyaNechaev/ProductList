@@ -7,38 +7,46 @@ namespace PL.Web.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        EShopDbContext _dbContext;
+        IUserService _userService;
 
-        public UserController(EShopDbContext dbContext)
+        public UserController(IUserService userService)
         {
-            _dbContext = dbContext;
+            _userService = userService;
         }
 
         [HttpGet]
         public async Task<User> GetUser(string id)
         {
-            var userId = Guid.Parse(id);
-            var user = await _dbContext.Users.FindAsync(userId);
+            var user = await _userService.GetUserByIdAsync(id);
 
             return user;
         }
 
         [HttpPut("add")]
-        public async Task<User> AddUser([FromBody] User user)
+        public async Task<IActionResult> AddUser([FromBody] User user)
         {
-            await _dbContext.Users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
+            var result = await _userService.AddUserAsync(user);
 
-            return user;
+            if (!result)
+            {
+                return Ok("Не удалось добавить пользователя");
+            }
+
+            return Ok(user);
         }
 
         [HttpDelete("rm")]
-        public async void RemoveUser(string id)
+        public async Task<IActionResult> RemoveUser(string id)
         {
-            var user = await GetUser(id);
-            _dbContext.Users.Remove(user);
+            var userId = Guid.Parse(id);
+            var result = await _userService.RemoveUserByIdAsync(userId);
 
-            await _dbContext.SaveChangesAsync();
+            if (!result)
+            {
+                return Ok("Не удалось удалить пользователя");
+            }
+
+            return Ok($"Пользователь {id} удален");
         }
     }
 }
