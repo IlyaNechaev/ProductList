@@ -18,8 +18,8 @@ public interface IUserService
     public bool AddUser(User user);
     public Task<bool> AddUserAsync(User user);
 
-    public User AddUsers(IEnumerable<User> users);
-    public Task<User> AddUsersAsync(IEnumerable<User> users);
+    public bool AddUsers(IEnumerable<User> users);
+    public Task<bool> AddUsersAsync(IEnumerable<User> users);
 
     #endregion
 
