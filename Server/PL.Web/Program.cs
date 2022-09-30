@@ -12,10 +12,7 @@ builder.Services.AddLogging();
 var connectionString = builder.Configuration.GetConnectionString("Default");
 
 // Entity Framework Core
-builder.Services.AddDbContext<EShopDbContext>(builder =>
-{
-    builder.UseSqlServer(connectionString);
-});
+builder.Services.AddSqlDbContext(builder.Configuration);
 
 builder.Services.AddTransient<IUserService, UserService>();
 
