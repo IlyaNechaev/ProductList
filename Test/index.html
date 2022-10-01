@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+
+    </form>
+    <button
+        onclick="deleteUser('3fa85f64-5717-4562-b3fc-2c963f66afa6')">Привет</button>
+    <script>
+        async function editUser(id, nameOne, nameTwo, nickname, hash, order) {
+
+            let response = await fetch("https://localhost:7112/api/users", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({
+                    objectID: id,
+                    firstName: nameOne,
+                    lastName: nameTwo,
+                    login: nickname,
+                    passwordHash: hash,
+                    orders: order
+                })
+            });
+
+            let user = await response.json();
+            console.log(user);
+        }
+
+        async function deleteUser(id) {
+
+            let response = await fetch("https://localhost:7112/api/user/rm?id=" + id, {
+                method: "DELETE",
+                mode: "no-corse",
+                header: { "Content-Type": "application/json; charset=utf-8" }
+            });
+
+            let user = await response.json();
+        }
+
+    </script>
+
+</body>
+
+</html>
