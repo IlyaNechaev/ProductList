@@ -1,11 +1,22 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddLogging();
+
+// Добавляем собственные сервисы
+#region CUSTOM_SERVICES
+
+var connectionString = builder.Configuration.GetConnectionString("Default");
+
+// Entity Framework Core
+builder.Services.AddSqlDbContext(builder.Configuration);
+
+builder.Services.AddTransient<IUserService, UserService>();
+
+#endregion
 
 var app = builder.Build();
 
@@ -15,6 +26,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandler>();
 
 app.UseHttpsRedirection();
 
