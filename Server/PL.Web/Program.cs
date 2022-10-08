@@ -30,6 +30,9 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionHandler>();
 
 app.UseHttpsRedirection();
+app.UseCors(builder => {
+    builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+    });
 
 app.UseAuthorization();
 
