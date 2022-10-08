@@ -14,6 +14,14 @@ namespace PL.Web.Controllers
             _userService = userService;
         }
 
+        [HttpGet("/api/users")]
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            var users = await _userService.GetUsersByLoginAsync(string.Empty);
+
+            return users;
+        }
+
         [HttpGet]
         public async Task<User> GetUser(string id)
         {
@@ -22,9 +30,10 @@ namespace PL.Web.Controllers
             return user;
         }
 
-        [HttpPut("add")]
-        public async Task<IActionResult> AddUser([FromBody] User user)
+        [HttpPost("add")]
+        public async Task<IActionResult> AddUser([FromBody] UserView userView)
         {
+            var user = userView.ToUser();
             var result = await _userService.AddUserAsync(user);
 
             if (!result)
