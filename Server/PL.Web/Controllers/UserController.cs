@@ -57,5 +57,11 @@ namespace PL.Web.Controllers
 
             return Ok($"Пользователь {id} удален");
         }
+
+        [HttpGet("/test")]
+        public IActionResult Test()
+        {
+            return Ok("Test passed");
+        }
     }
 }
