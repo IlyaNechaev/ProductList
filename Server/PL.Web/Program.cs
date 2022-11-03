@@ -9,8 +9,6 @@ builder.Services.AddLogging();
 // Добавляем собственные сервисы
 #region CUSTOM_SERVICES
 
-var connectionString = builder.Configuration.GetConnectionString("Default");
-
 // Entity Framework Core
 builder.Services.AddSqlDbContext(builder.Configuration);
 
