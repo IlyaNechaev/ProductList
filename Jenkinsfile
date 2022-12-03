@@ -1,9 +1,10 @@
 pipeline {
     agent {label "linux"}
     stages {
-        stage(Hello') {
+        stage('Hello') {
 	    steps {
-	        sh 'echo hello'
+	        echo Hello
+	        sh 'ls -l'
 	    }
 	}
     }
