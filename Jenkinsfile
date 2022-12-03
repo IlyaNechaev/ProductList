@@ -1,10 +1,19 @@
 pipeline {
-    agent {label "linux"}
+    agent any
+
     stages {
-        stage('Hello') {
+        stage('Check dotnet') {
 	    steps {
-	        echo Hello
-	        sh 'ls -l'
+	        sh 'dotnet --version'
+	    }
+	}
+	stage('Build server') {
+            steps {
+	        sh '''
+		    cd ./Server/PL.Web
+		    dotnet restore
+		    dotnet build -c Release -o "../../build/Server" --no-restore
+		'''
 	    }
 	}
     }
