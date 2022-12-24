@@ -9,7 +9,7 @@ function App() {
   const [password, setPassword] = useState("");
 
   async function getUsers(e) {
-    let response = await fetch("https://localhost:7112/api/users", {
+    let response = await fetch("http://kali/api/users", {
       method: "GET",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -23,7 +23,7 @@ function App() {
   }
 
   async function addUser(e) {
-    let response = await fetch("https://localhost:7112/api/user/add", {
+    let response = await fetch("http://kali/api/user/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
