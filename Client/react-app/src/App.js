@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div className="main">
-      <h2>Добавить пользователя</h2>
+      <h2>Добавить нового пользователя</h2>
       <div className="form">
         <input
           type="text"
